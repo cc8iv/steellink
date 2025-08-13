@@ -1,0 +1,109 @@
+/* ## SERVICE PAGE STYLE ## */
+.service-holder {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+.service-item {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+
+}
+
+.service-item:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+.service-image-container {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    min-width: 300px;
+    height: 300px;
+    background-color: #f3f3f3;
+    overflow: hidden;
+    border: 5px solid var(--links);
+    border-radius: 0px 20px;
+    border-left-width: 0px;
+    border-bottom-width: 0px;
+}
+
+.service-image-container img{
+    width: fit-content;
+}
+
+.service-body {
+    display: flex;
+    padding: 0 20px;
+    gap: 20px;
+    flex-direction: column;
+    text-align: left;
+}
+
+.hidden {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.service-body-image-carousel {
+    display: flex;
+}
+
+.service .service-item a.btn {
+    display: flex;
+    width: fit-content;
+    padding: 20px;
+    font-size: .8rem;
+    font-weight: 500;
+    background-color: var(--links);
+    color: #fff;
+
+    transition: all .2s ease;
+}
+
+.service .service-item a.btn:hover {
+
+    background-color: var(--primary);
+    color: #fff;
+}
+
+/* 
+
+        .service .service-item a.btn img {
+            width: 100%;
+
+        }
+
+        a.btn {
+            background-color: none;
+        } */
+
+@media screen and (max-width: 800px) {
+
+    .service-item,
+    .service-item:nth-of-type(even) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .service-body {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .service-body-image-carousel {
+        width: 100%;
+        max-width: 200px;
+        flex-wrap: wrap;
+        overflow: hidden;
+        justify-content: center;
+    }
+
+
+}
