@@ -1,20 +1,58 @@
 <?php
-if(empty($_POST['name']) || empty($_POST['subject']) || empty($_POST['message']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-  http_response_code(500);
-  exit();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+// Validate form
+if (empty($_POST['name']) || empty($_POST['subject']) || empty($_POST['message']) || 
+    !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    http_response_code(500);
+    exit("Invalid form submission");
 }
 
-$name = strip_tags(htmlspecialchars($_POST['name']));
-$email = strip_tags(htmlspecialchars($_POST['email']));
-$m_subject = strip_tags(htmlspecialchars($_POST['subject']));
-$message = strip_tags(htmlspecialchars($_POST['message']));
+$name     = strip_tags($_POST['name']);
+$email    = strip_tags($_POST['email']);
+$m_subject= strip_tags($_POST['subject']);
+$message  = strip_tags($_POST['message']);
 
-$to = "umehchidieberemicheal7@gmail.com"; // Change this email to your //
-$subject = "$m_subject:  $name";
-$body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\n\nEmail: $email\n\nSubject: $m_subject\n\nMessage: $message";
-$header = "From: $email";
-$header .= "Reply-To: $email";	
+$to = "nofacefinder@gmail.com"; 
+$subject = "$m_subject: $name";
+$body = "
+    <h2>New Contact Form Submission</h2>
+    <p><strong>Name:</strong> {$name}</p>
+    <p><strong>Email:</strong> {$email}</p>
+    <p><strong>Subject:</strong> {$m_subject}</p>
+    <p><strong>Message:</strong><br>{$message}</p>
+";
 
-if(!mail($to, $subject, $body, $header))
-  http_response_code(500);
-?>
+$mail = new PHPMailer(true);
+
+try {
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = 'crownedx.creativ@gmail.com';
+    $mail->Password   = 'piem zoex uuzw efef'; // <- use Gmail App Password here
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = 465;
+
+    $mail->setFrom('nofacefinder@gmail.com', 'Website Contact');
+    $mail->addAddress($to, 'Website Admin');
+    $mail->addReplyTo($email, $name);
+
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body    = $body;
+
+    $mail->SMTPDebug = 2;
+    $mail->Debugoutput = 'html';
+
+    $mail->send();
+    echo "Message sent successfully!";
+} catch (Exception $e) {
+    http_response_code(500);
+    echo "Mailer Error: {$mail->ErrorInfo}";
+}

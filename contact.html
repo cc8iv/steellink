@@ -72,6 +72,7 @@
                                     <div class="top-bar-text">
                                         <h3>Call Us</h3>
                                         <p>08133041655</p>
+                                        <p>09115275947</p>
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +162,7 @@
                                 <div class="contact-text">
                                     <h2>Phone</h2>
                                     <p>08133041655</p>
+                                    <p>09115275947</p>
                                 </div>
                             </div>
                             <div class="contact-item">
@@ -175,25 +177,25 @@
                     <div class="col-md-6">
                         <div class="contact-form">
                             <div id="success"></div>
-                            <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <form name="sentMessage" id="contactForm" novalidate="novalidate" onsubmit="sendMail(event)">
                                 <div class="control-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name"
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name"
                                         required="required" data-validation-required-message="Please enter your name" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email"
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Your Email"
                                         required="required"
                                         data-validation-required-message="Please enter your email" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject"
-                                        required="required" data-validation-required-message="Please enter a subject" />
+                                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject"
+                                         data-validation-required-message="Please enter a subject" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="control-group">
-                                    <textarea class="form-control" id="message" placeholder="Message"
+                                    <textarea class="form-control" id="message" name="message" placeholder="Message"
                                         required="required"
                                         data-validation-required-message="Please enter your message"></textarea>
                                     <p class="help-block text-danger"></p>
@@ -221,7 +223,7 @@
                                 Rumuodomaya, Port Harcourt,
                                 Rivers state,
                                 Nigeria.</p>
-                            <p><i class="fa fa-phone-alt"></i>08133041655</p>
+                            <p><i class="fa fa-phone-alt"></i>08133041655, 09115275947</p>
                             <p><i class="fa fa-envelope"></i>umehchidieberemicheal7<br>@gmail.com</p>
                             <div class="footer-social">
                                 <a href="https://wa.me/2348133041655" target="_blank" rel="noopener"
@@ -284,7 +286,8 @@
     <script src="lib/slick/slick.min.js"></script>
 
     <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <!-- <script src="mail/jqBootstrapValidation.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script src="mail/contact.js"></script>
 
     <!-- Template Javascript -->
